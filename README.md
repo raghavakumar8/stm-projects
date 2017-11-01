@@ -5,7 +5,7 @@ A PlatformIO based workspace for cross-platform STM32 development.
 ## Setup
 - Clone this repository
 ```
-git clone https://www.github.com/raghavakumar8/stm_ws.git
+git clone https://github.com/raghavakumar8/stm-projects.git
 ```
 - Install PlatformIO:
 ```
