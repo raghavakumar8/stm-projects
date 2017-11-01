@@ -1,5 +1,5 @@
+[![Build Status](https://travis-ci.org/raghavakumar8/stm-projects.svg?branch=master)](https://travis-ci.org/raghavakumar8/stm-projectss)
 # STM Projects
-
 A PlatformIO based workspace for cross-platform STM32 development. 
 
 ## Setup
