@@ -5,9 +5,9 @@
 
 #include "stm32f7xx_hal.h"
 
-#define LED_PIN                GPIO_PIN_5
-#define LED_GPIO_PORT          GPIOA
-#define LED_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOA_CLK_ENABLE()
+#define LED_PIN                GPIO_PIN_1
+#define LED_GPIO_PORT          GPIOI
+#define LED_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOI_CLK_ENABLE()
 
 int main(void)
 {
