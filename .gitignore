@@ -1,3 +1,5 @@
 .pioenvs
 .piolibdeps
 *.sublime-workspace
+.vscode
+.vscode/c_cpp_properties.json

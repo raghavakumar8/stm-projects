@@ -21,10 +21,10 @@ pio run
 pio run -e blink -t upload
 ```
 
-## Sublime Text Integration
+## IDE Integration
 
-This repository also contains `.sublime-project` files that can be used directly. 
-- You may need to edit directory locations in the `.sublime-project` files for everything to work correctly.
-- To build, clean or upload, use shortcuts found in the `Ctrl-Shift-P` menu. 
-- To enable debugging using Sublime, install `SublimeGDB` using Package Manager. 
-- A debugging session can be started by hitting `F5`.
+PlatformIO integrates well with a number of IDEs. To see a list of available IDEs and configure your project:
+```
+cd stm-projects && pio init -h
+pio init --ide <chosen-ide>
+```
