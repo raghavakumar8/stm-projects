@@ -1,29 +1,10 @@
 /**
- * File: main.c
+ * File: hal.c
  * Author: Raghava Kumar
  */
 
 #include "stm32f7xx_hal.h"
-
-volatile uint32_t delay_ms = 1000;
-volatile uint32_t last_tick_ms = 0;
-volatile char first_tap = 1;
-
-int main(void)
-{
-  HAL_Init();
-
-  while (1)
-  {
-    HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_1);
-    HAL_Delay(delay_ms);
-  }
-}
-
-void SysTick_Handler(void)
-{
-  HAL_IncTick();
-}
+#include "tap_freq/include/main.h"
 
 void HAL_MspInit(void)
 {
@@ -46,20 +27,4 @@ void HAL_MspInit(void)
 
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-}
-
-void EXTI15_10_IRQHandler()
-{
-  __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_11);
-
-  if (first_tap == 1)
-  {
-    last_tick_ms = HAL_GetTick();
-    first_tap = 0;
-  }
-  else
-  {
-    delay_ms = HAL_GetTick() - last_tick_ms;
-    first_tap = 1;
-  }
 }
