@@ -50,6 +50,8 @@ void HAL_MspInit(void)
 
 void EXTI15_10_IRQHandler()
 {
+  __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_11);
+
   if (first_tap == 1)
   {
     last_tick_ms = HAL_GetTick();
@@ -60,7 +62,4 @@ void EXTI15_10_IRQHandler()
     delay_ms = HAL_GetTick() - last_tick_ms;
     first_tap = 1;
   }
-
-  __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_All);
-  __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_All);
 }
