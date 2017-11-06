@@ -13,7 +13,7 @@ pip install -U platformio
 ```
 - Compile all projects
 ```
-cd stm_ws
+cd stm-projects
 pio run
 ```
 - Upload a specific project:
