@@ -8,4 +8,4 @@
 
 extern volatile uint32_t delay_ms;
 
-#endif MAIN_H
+#endif // MAIN_H
