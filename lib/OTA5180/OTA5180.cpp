@@ -7,14 +7,10 @@
 
 void OTA5180::initialize()
 {
+  // Configure backlight
   __HAL_RCC_GPIOK_CLK_ENABLE();
-  GPIO_InitTypeDef GPIO_InitStruct;
-
-  GPIO_InitStruct.Pin = GPIO_PIN_3;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
-  HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
+  GPIOK->MODER |= 1 << 6; // Output
+  GPIOK->OTYPER |= 1 << 3; // Open Drain
 
   initialized_ = true;
 }
@@ -23,10 +19,10 @@ void OTA5180::backlight(bool on)
 {
   if (on)
   {
-    HAL_GPIO_WritePin(GPIOK, GPIO_PIN_3, GPIO_PIN_SET);
+    GPIOK->ODR |= 1 << 3;
   }
   else
   {
-    HAL_GPIO_WritePin(GPIOK, GPIO_PIN_3, GPIO_PIN_RESET);
+    GPIOK->ODR &= !(1 << 3);
   }
 }
