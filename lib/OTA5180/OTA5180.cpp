@@ -3,26 +3,17 @@
  * Author: Raghava Kumar
  */
 
-#include "OTA5180.h"
+#include "ota5180.h"
 
 void OTA5180::initialize()
 {
-  // Configure backlight
-  __HAL_RCC_GPIOK_CLK_ENABLE();
-  GPIOK->MODER |= 1 << 6; // Output
-  GPIOK->OTYPER |= 1 << 3; // Open Drain
-
+  backlight_.configure(OUTPUT, LOW, PUSH_PULL, NONE);
   initialized_ = true;
 }
 
 void OTA5180::backlight(bool on)
 {
-  if (on)
-  {
-    GPIOK->ODR |= 1 << 3;
-  }
-  else
-  {
-    GPIOK->ODR &= !(1 << 3);
-  }
+  if (!initialized_) return;
+
+  backlight_.write(on);
 }

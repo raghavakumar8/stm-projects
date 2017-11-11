@@ -3,7 +3,12 @@
  * Author: Raghava Kumar
  */
 
-#include "stm32f7xx_hal.h"
+#ifndef OTA5180_H
+#define OTA5180_H
+
+#include "hardware.h"
+#include "pin/pin.h"
+#include "i2c/i2c.h"
 
 class OTA5180
 {
@@ -11,6 +16,7 @@ class OTA5180
 public:
   OTA5180()
    : initialized_(false)
+   , backlight_(GPIOK, 3)
   {
   }
 
@@ -31,4 +37,7 @@ public:
 private:
   bool initialized_;
 
+  Pin backlight_;
 };
+
+#endif // OTA5180_H

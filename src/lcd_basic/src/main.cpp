@@ -3,9 +3,8 @@
  * Author: Raghava Kumar
  */
 
-#include "stm32f7xx_hal.h"
 #include "lcd_basic/include/main.h"
-#include "OTA5180.h"
+#include "ota5180.h"
 
 int main(void)
 {
