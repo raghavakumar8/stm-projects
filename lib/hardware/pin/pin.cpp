@@ -33,6 +33,12 @@ void Pin::write(bool value)
   else port_->ODR &= !(1 << pin_);
 }
 
+void Pin::toggle()
+{
+  if (read()) port_->ODR &= !(1 << pin_);
+  else port_->ODR |= 1 << pin_;
+}
+
 void Pin::setAlternateFunction(uint8_t af)
 {
   if (pin_ < 8) port_->AFR[0] |= (af & 0xf) << (pin_ << 2);

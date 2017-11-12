@@ -72,6 +72,11 @@ public:
   void write(bool value);
 
   /**
+   * @brief toggle pin state
+   **/
+  void toggle();
+
+  /**
    * @brief configure the pin for an alternate function
    **/
   void setAlternateFunction(uint8_t af);
