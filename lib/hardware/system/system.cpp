@@ -12,8 +12,18 @@ static Source source = INTERNAL_OSC;
 static int sysclk_mhz = 16;
 static int source_mhz = 16;
 
-void initialize(int mhz)
+volatile static long ms = 0;
+
+void init(int mhz)
 {
+  // Enable caches
+  SCB_EnableICache();
+  SCB_EnableDCache();
+
+  // Enable ART accelerator
+  FLASH->ACR != FLASH_ACR_ARTEN;
+  
+  // Enable clock source and set frequency
   switch (system::source)
   {
     case INTERNAL_OSC:
@@ -102,6 +112,38 @@ void setFrequency(int mhz)
   // Make sure clock has been updated correctly
   SystemCoreClockUpdate();
   check::assert(SystemCoreClock == (uint32_t) mhz*1000000);
+
+  // Update SysTick for 1ms interrupt
+  SysTick_Config(sysclk_mhz*1000);
 }
 
-}  // namespace system
+void incr_ms()
+{
+  system::ms++;
+}
+
+void delay(int ms)
+{
+  int wait_till = ms + system::ms;
+  while(system::ms < wait_till);
+}
+
+long millis()
+{
+  return system::ms;
+}
+
+}  // namespace 
+
+extern "C" {
+
+#ifndef OVERRIDE_SYSTICK
+
+void SysTick_Handler(void)
+{
+  system::incr_ms();
+}
+
+#endif
+
+}
